@@ -55,4 +55,16 @@ public abstract class WebSocketListener {
    */
   public void onFailure(WebSocket webSocket, Throwable t, @Nullable Response response) {
   }
+
+  /**
+   * Invoked when writing a ping message.
+   */
+  public void onPing(WebSocket webSocket, ByteString bytes) {
+  }
+
+  /**
+   * Invoked when a pong message has been received.
+   */
+  public void onPong(WebSocket webSocket, ByteString bytes) {
+  }
 }

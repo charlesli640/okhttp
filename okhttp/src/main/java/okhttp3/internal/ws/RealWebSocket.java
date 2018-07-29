@@ -339,6 +339,7 @@ public final class RealWebSocket implements WebSocket, WebSocketReader.FrameCall
     // This API doesn't expose pings.
     receivedPongCount++;
     awaitingPong = false;
+    listener.onPong(this, buffer);
   }
 
   @Override public void onReadClose(int code, String reason) {
@@ -550,6 +551,7 @@ public final class RealWebSocket implements WebSocket, WebSocketReader.FrameCall
 
     try {
       writer.writePing(ByteString.EMPTY);
+      listener.onPing(this, ByteString.EMPTY);
     } catch (IOException e) {
       failWebSocket(e, null);
     }
