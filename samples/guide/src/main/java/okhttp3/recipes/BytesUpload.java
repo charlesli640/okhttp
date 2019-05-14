@@ -72,10 +72,10 @@ public final class BytesUpload {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", "test_zero.png",
-                        new CountingRequestBody(RequestBody.create(MediaType.parse("image/png"), bytes),
-                                progressListener))
-                .build();
-
+                        new CountingRequestBody(
+                                RequestBody.create(MediaType.parse("image/png"), bytes),
+                                progressListener)
+                        ).build();
 
         Request request = new Request.Builder()
                 .url("http://192.168.1.9:5000/")
@@ -115,13 +115,8 @@ public final class BytesUpload {
         }
 
         @Override
-        public long contentLength() {
-            try {
-                return delegate.contentLength();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return -1;
+        public long contentLength() throws IOException {
+            return delegate.contentLength();
         }
 
         @Override
